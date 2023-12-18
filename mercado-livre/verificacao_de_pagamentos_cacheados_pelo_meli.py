@@ -7,7 +7,7 @@ import json
 import asyncio
 import aiohttp
 
-ACCESS_TOKEN = 'APP_USR-5417402069385811-101506-62b091a8cecc5c6c8b3c35d76f6465d1-537429925'
+ACCESS_TOKEN = ''
 
 class Payment:
     id = None
