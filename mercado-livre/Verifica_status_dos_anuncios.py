@@ -6,7 +6,7 @@ import json
 def getAdFromML(id, token):
     print('Buscando anúncio no ML')
     try:
-        url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-082513-1e94ce03f61c8c0140e50dbb34976323-397531057'
+        url = f'https://api.mercadolibre.com/items/{id}?access_token='
         response = requests.get(url)
     except:
         print('Erro ao buscar anúncio no ML')
