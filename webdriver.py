@@ -17,9 +17,9 @@ driver.get("https://mob1nvpc.pipz.io")
 # faz login email="cs.time@novovarejo.com" senha="*hjuy%%4@"
 time.sleep(5)
 email = driver.find_element(By.ID, "email")
-email.send_keys("cs.time@novovarejo.com")
+email.send_keys("")
 senha = driver.find_element(By.ID, "password")
-senha.send_keys("*hjuy%%4@")
+senha.send_keys("")
 senha.send_keys(Keys.RETURN)
 time.sleep(5)
 
