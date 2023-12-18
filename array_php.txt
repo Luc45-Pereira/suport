@@ -1,0 +1,66 @@
+
+[
+    'template' => 'approved-order',
+    'subject' => 'Olá {{ contact.name|fname }}, seu pedido foi aprovado!',
+],
+
+[
+    'template' => 'awaiting-processing-order',
+    'subject' => 'Olá {{ contact.name|fname }}, recebemos seu pedido!',
+],
+
+[
+    'template' => 'canceled-order',
+    'subject' => 'Olá {{ contact.name|fname }}, seu pedido foi cancelado!',
+],
+
+[
+    'template' => 'credit-card-unauthorized',
+    'subject' => 'Olá {{ contact.name|fname }}, seu pedido não foi aprovado',
+],
+
+[
+    'template' => 'invoice-issued',
+    'subject' => 'Olá {{ contact.name|fname }}, segue a Nota Fiscal do seu pedido!',
+],
+
+[
+    'template' => 'login-authcode-request',
+    'subject' => 'Sua chave de acesso é {{auth_code}}',
+],
+
+[
+    'template' => 'member-password-recovery-request',
+    'subject' => 'Dashboard: Olá {{contact.name|fname}}, recupere sua senha!',
+],
+
+[
+    'template' => 'order-delivered-rating',
+    'subject' => 'Olá {{ contact.name|fname }}, tudo certo com seu produto?',
+],
+
+[
+    'template' => 'order-shipped',
+    'subject' => 'Olá {{ contact.name|fname }}, seu pedido já está a caminho!',
+],
+
+[
+    'template' => 'password-recovery-request',
+    'subject' => 'Olá {{contact.name|fname}}, recupere sua senha!',
+],
+
+[
+    'template' => 'password-recovery-request-BKP',
+    'subject' => 'Recuperação de sua senha',
+],
+
+[
+    'template' => 'teste unsubscribe',
+    'subject' => '{{contact.email}}',
+],
+
+[
+    'template' => 'teste-estrutura-transacional',
+    'subject' => 'Teste de estrutura',
+],
+        

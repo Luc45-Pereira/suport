@@ -1,0 +1,47 @@
+{
+    "title":"Parafuso de Fixau00e7u00e3o do Estepe HYUNDAI HB20",
+    "category_id":"MLB271145",
+    "price":110.76,
+    "currency_id":"BRL",
+    "buying_mode":"buy_it_now",
+    "listing_type_id":"gold_pro",
+    "condition":"new",
+    "pictures":[{"source":"https://static.novovarejo.com/img/1200x1200//bi/aj/ji/2aba5ffd.JPG"},
+    {"source":"https://static.novovarejo.com/img/1200x1200//bi/aj/ji/e4586157.JPG"},
+    {"source":"https://static.novovarejo.com/img/1200x1200//bi/aj/ji/26d6ac3b.png"},
+    {"source":"https://static.novovarejo.com/img/1200x1200//g/ja/62892464.png"},
+    {"source":"https://static.novovarejo.com/img/1200x1200//g/jb/80ef4895.jpg"}],
+    "available_quantity":0,
+    "shipping":{"mode":"me2",
+    "local_pick_up":true,
+    "free_shipping":false},
+    "official_store_id":null,
+    "attributes":[{"id":"BRAND",
+    "value_id":"1089",
+    "value_name":"Hyundai"},
+    {"id":"MPN",
+    "value_name":"628501R300"},
+    {"id":"PART_NUMBER",
+    "value_name":"628501R300"},
+    {"id":"SELLER_SKU",
+    "value_name":"628501R300"},
+    {"id":"GTIN",
+    "value_name":"7891120609456"},
+    {"id":"EAN",
+    "value_name":"7891120609456"},
+    {"id":"ORIGIN",
+    "value_id":"97214",
+    "value_name":"Brasil"}],
+    "video_id":null,
+    "seller_custom_field":"nvpc_ad_1842309",
+    "sale_terms":[
+        {
+            "id":"WARRANTY_TYPE",
+            "value_id":"2230280"
+        },
+        {
+            "id":"WARRANTY_TIME",
+            "value_name":"90 dias"
+        }
+    ]
+}

@@ -1,0 +1,496 @@
+
+            [
+                'template' => '[COMMERCE.MOB1.PARTS] Nome do e-mail',
+                'subject' => 'Avisos',
+            ],
+        
+            [
+                'template' => '[HUB DEALERNET] NOTIFY 01 - TIME VENDAS - NOVO LEAD',
+                'subject' => '[HUB DEALERNET] NOVO LEAD entrou na lista',
+            ],
+        
+            [
+                'template' => '[HUB DEALERNET] NOTIFY 02 - TIME VENDAS - LEAD DADOS PROPOSTA',
+                'subject' => '[HUB DEALERNET] Fique atento, {{contact.sr_owner.name}}',
+            ],
+        
+            [
+                'template' => '[HUB DEALERNET] NOTIFY 03 - TIME VENDAS - LEAD PREENCHEU FORM DADOS PROPOSTA',
+                'subject' => '[HUB DEALERNET] Boas notícias, {{contact.sr_owner.name}}!',
+            ],
+        
+            [
+                'template' => '[HUB DEALERNET] NOTIFY 04 - TIME VENDAS - AVISO CARD PARADO COLUNA PROPOSTA ENVIADA',
+                'subject' => '[HUB DEALERNET] {{contact.sr_owner.name}}, card parado na coluna PROPOSTA ENVIADA',
+            ],
+        
+            [
+                'template' => '[HUB DEALERNET] NOTIFY 05 - TIME VENDAS - AVISO CARD PARADO COLUNA CONTRATO ENVIADO',
+                'subject' => '[HUB DEALERNET] {{contact.sr_owner.name}}, card parado na coluna CONTRATO ENVIADO',
+            ],
+        
+            [
+                'template' => '[HUB LINX] NOTIFY 01 - TIME VENDAS - NOVO LEAD',
+                'subject' => '[HUB LINX] NOVO LEAD entrou na lista',
+            ],
+        
+            [
+                'template' => '[HUB LINX] NOTIFY 02 - TIME VENDAS - LEAD DADOS PROPOSTA',
+                'subject' => '[HUB LINX] Fique atento, {{contact.sr_owner.name}}',
+            ],
+        
+            [
+                'template' => '[HUB LINX] NOTIFY 03 - TIME VENDAS - LEAD PREENCHEU FORM DADOS PROPOSTA',
+                'subject' => '[HUB LINX] Boas notícias, {{contact.sr_owner.name}}!',
+            ],
+        
+            [
+                'template' => '[HUB LINX] NOTIFY 04 - TIME VENDAS - AVISO CARD PARADO COLUNA PROPOSTA ENVIADA',
+                'subject' => '[HUB LINX] {{contact.sr_owner.name}}, card parado na coluna PROPOSTA ENVIADA',
+            ],
+        
+            [
+                'template' => '[HUB LINX] NOTIFY 05 - TIME VENDAS - AVISO CARD PARADO COLUNA CONTRATO ENVIADO',
+                'subject' => '[HUB LINX] {{contact.sr_owner.name}}, card parado na coluna CONTRATO ENVIADO',
+            ],
+        
+            [
+                'template' => '[HUB NBS] NOTIFY 01 - TIME VENDAS - NOVO LEAD',
+                'subject' => '[HUB NBS] NOVO LEAD entrou na lista',
+            ],
+        
+            [
+                'template' => '[HUB NBS] NOTIFY 02 - TIME VENDAS - LEAD DADOS PROPOSTA',
+                'subject' => '[HUB NBS] Fique atento, {{contact.sr_owner.name}}',
+            ],
+        
+            [
+                'template' => '[HUB NBS] NOTIFY 03 - TIME VENDAS - LEAD PREENCHEU FORM DADOS PROPOSTA',
+                'subject' => '[HUB NBS] Boas notícias, {{contact.sr_owner.name}}!',
+            ],
+        
+            [
+                'template' => '[HUB NBS] NOTIFY 04 - TIME VENDAS - AVISO CARD PARADO COLUNA PROPOSTA ENVIADA',
+                'subject' => '[HUB NBS] {{contact.sr_owner.name}}, card parado na coluna PROPOSTA ENVIADA',
+            ],
+        
+            [
+                'template' => '[HUB NBS] NOTIFY 05 - TIME VENDAS - AVISO CARD PARADO COLUNA CONTRATO ENVIADO',
+                'subject' => '[HUB NBS] {{contact.sr_owner.name}}, card parado na coluna CONTRATO ENVIADO',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] (TEMA DO TREINAMENTO) - (NOME DO GRUPO)',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 1. Treinamento de Vendas e Marketplaces',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 2. Treinamento de Concorrência e Reputação',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 3. Treinamento de Anúncios e Precificação',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 4. Treinamento de Análise de Relatórios',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 5. Treinamento de Funil de Vendas e Conversão',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] 6. Treinamento Financeiro',
+                'subject' => 'Treinamentos',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] BLACK FRIDAY',
+                'subject' => '{{contact.name|fname}}, quer dicas de como arrasar na Black Friday? Então vem com a gente!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] COMMERCE',
+                'subject' => 'Sinto cheiro de mais uma novidade no ar!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] COMUNICADO ATUALIZAÇÃO DO HUB',
+                'subject' => 'Atualizações do HUB. {{contact.name|fname}} Confira!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] COMUNICADO LOJA OFICIAL - GRUPO BARIGUI',
+                'subject' => 'Comunicado Mercado Livre - Grupo Barigui',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] DIVULGAÇÃO ACADEMY',
+                'subject' => 'Venha conferir conosco mais uma novidade da NVPC =D',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] DIVULGAÇÃO CHECKLIST',
+                'subject' => '{{contact.name|fname}} venha conferir conosco mais uma novidade da NVPC =D',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] DIVULGAÇÃO WHATSAPP',
+                'subject' => 'NOVIDADE :: Nosso WhatsApp já está no ar \o/',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] E-book Anúncios e Precificações',
+                'subject' => '{{contact.name|fname}} temos uma novidade para te mostrar :)',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] FERIADO',
+                'subject' => 'Feriado de xxx',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] FLUXO DO PEDIDO - B2W',
+                'subject' => 'Conheça agora o Fluxo do Pedido - B2W :)',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] HUB EM MANUTENÇÃO',
+                'subject' => 'Atenção, Hub Dashboard instável!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] LEMBRETE - DIVULGAÇÃO WHATSAPP',
+                'subject' => 'WhatsApp NVPC =D',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] LEMBRETE COMMERCE',
+                'subject' => '[AVISO] CONFIRME SUA PRESENÇA AINDA HOJE!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] MANUTENÇÃO DO MOB1.ACADEMY',
+                'subject' => 'Aviso de Manutenção!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] PEDIDO DE DESCULPA',
+                'subject' => 'AVISO!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] PESQUISA DE RECOMENDAÇÃO',
+                'subject' => 'Avalie nossa empresa :)',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] PROBLEMA DE INSTABILIDADE RESOLVIDO',
+                'subject' => 'A instabilidade do HUB.MOB1.PARTS foi resolvida =D',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] SEMANA DO CONSUMIDOR',
+                'subject' => '{{contact.name|fname}}, dicas para a semana do consumidor',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] SUPORTE INDISPONÍVEL',
+                'subject' => 'Atenção, atendimento via HUB indisponível!!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] TREINAMENTO - FINANCEIRO',
+                'subject' => 'Oba, mais um treinamento chegando \o/',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1.PARTS] TREINAMENTO - RELATÓRIO',
+                'subject' => 'Venha participar conosco de um novo treinamento \o/',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] Conteúdo Rico - APRESENTAÇÃO',
+                'subject' => 'PDF: HUB.MOB1.PARTS - Conhecendo a plataforma',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] Conteúdo Rico - CHECKLIST',
+                'subject' => 'HUB.MOB1.PARTS - Checklist: Sua Concessionária está pronta para Vender Online?',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] Conteúdo Rico - INFOGRÁFICO',
+                'subject' => 'HUB.MOB1.PARTS - Infográfico: Dados de venda durante a pandemia',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL 01 - PRIMEIRO CONTATO',
+                'subject' => '{{contact.name|fname}}, obrigado por entrar em contato!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL 03 - MARCAR REUNIÃO',
+                'subject' => 'É hora de acelerarmos suas vendas, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL 04 - LANDPAGE DADOS PROPOSTA',
+                'subject' => '{{contact.name|fname}}, chegou a hora!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL 05 - TENTATIVA 2 LANDPAGE DADOS PROPOSTA',
+                'subject' => 'Sua proposta está próxima, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL 06 - RETORNO NEGATIVO AGRADECIMENTO',
+                'subject' => 'Agradecemos seu tempo, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL LEAD ESTÁ NA LISTA MOB1.CLUB',
+                'subject' => 'Obrigado por entrar em contato com nosso Time de Especialistas, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[HUB.MOB1] E-MAIL LEAD NÃO ESTÁ NA LISTA MOB1.CLUB',
+                'subject' => 'Obrigado por entrar em contato com nosso Time de Especialistas, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[MOB1 INFORMA] Template',
+                'subject' => 'Coloque o assunto aqui',
+            ],
+        
+            [
+                'template' => '[MOB1 NEWS] Dia do consumidor + Aniversário NVPC',
+                'subject' => 'Coloque o assunto aqui',
+            ],
+        
+            [
+                'template' => '[MOB1 NEWS] Template',
+                'subject' => 'Coloque o assunto aqui',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 0. TEMPLATE DE CONVITE (MODELO)',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 1. ONBOARDING :: 1. ONBOARDING :: INTEGRAÇÃO HUB x DMS',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 2. ONBOARDING :: SETUP LOJA',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 3. Integração Marketplace Mercado Livre',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 4. CONFIGURAÇÃO ANÚNCIO MERCADO LIVRE',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 5. Integração Marketplace Americanas',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] 6. INTEGRAÇÃO HUB X COMMERCE',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.ACADEMY] CRIAÇÃO DE USUÁRIOS NO HUB.MOB1.PARTS',
+                'subject' => 'Formulários',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] 02- Email Agradecimento + Link para Escolha do(s) Tema(s)',
+                'subject' => 'Não tem mais desculpa!',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 01 - EMAIL OPT IN NEWS - MAT. RICOS',
+                'subject' => '{{contact.name|fname}}, Faça parte da nossa lista de assinantes. É GRÁTIS!',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 02 - EMAIL OPT IN NEWS - LEMBRETE- MAT. RICOS',
+                'subject' => '{{contact.name|fname}}, você viu isso?',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 03 - Checklist - Material Rico',
+                'subject' => '[Checklist] Sua concessionária está pronta para vender online?',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 03 - Infográfico - Material Rico',
+                'subject' => '[Infográfico] Dados de venda durante a pandemia',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 03 - Métricas - Recebimento do Material',
+                'subject' => '[E-book] As 15 principais métricas e KPIs do e-commerce automotivo',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 04 - Agradecendo o contato e passando endereços para o CS',
+                'subject' => '{{contact.name|fname}}, obrigado por entrar em contato com o HUB.MOB1.CLUB',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 05 - CHECKLIST - Material Rico - Apresentação HUB',
+                'subject' => 'Venda autopeças nos maiores marketplaces do país.',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 05 - INFOGRAFICO - Material Rico - Apresentação HUB',
+                'subject' => 'Vendendo autoparts nos maiores marketplaces do país sem complicação!',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 05 - Métricas - Apresentação do HUB.MOB1.PARTS',
+                'subject' => 'Venda autoparts nos maiores marketplaces do país sem complicação!',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] E-MAIL 06 - Lembrete agendamento reunião',
+                'subject' => '{{contact.name|fname}}, suas autoparts no ML e na B2W!',
+            ],
+        
+            [
+                'template' => '[MOB1.CLUB] newsletter-quinzenal',
+                'subject' => '{{contact.name|fname}}, fique por dentro do conteúdo do MOB1.CLUB',
+            ],
+        
+            [
+                'template' => '[MOB1] [SALES] MOB1 INFORMA',
+                'subject' => '',
+            ],
+        
+            [
+                'template' => '[MOB1] [SALES] News Template padrão',
+                'subject' => 'Fuja que é cilada! Algumas dicas do que não fazer durante promoções',
+            ],
+        
+            [
+                'template' => '[MOB1] Informa - CLIENTES',
+                'subject' => '',
+            ],
+        
+            [
+                'template' => '[MOB1] News 2 - Black Friday',
+                'subject' => '',
+            ],
+        
+            [
+                'template' => '[MOB1] News Template padrão',
+                'subject' => 'Fuja que é cilada! Algumas dicas do que não fazer durante promoções',
+            ],
+        
+            [
+                'template' => '[MOB1] UPDATE',
+                'subject' => 'Você está convidado para o MOB1.XPERIENCE: 1º webinar MOB1 sobre varejo automotivo online',
+            ],
+        
+            [
+                'template' => '[MOB1]MOB1.Xperience',
+                'subject' => 'Você está convidado para o MOB1.XPERIENCE: 1º webinar MOB1 sobre varejo automotivo online',
+            ],
+        
+            [
+                'template' => '[NVPC] Fim de ano',
+                'subject' => '{{contact.name|fname}}, temos algo para te falar...',
+            ],
+        
+            [
+                'template' => '[NVPC] News aniversário',
+                'subject' => 'NVPC: 5 anos criando um novo varejo!  Olá, N’Maker! 🥝🚀',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL 02 - EMAIL OPT IN NEWS',
+                'subject' => '{{contact.name|fname}}, Faça parte da nossa lista de assinantes. É GRÁTIS!',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL 03 - EMAIL OPT IN NEWS LEMBRETE',
+                'subject' => '{{contact.name|fname}}, você viu isso?',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL01 - PRIMEIRO CONTATO',
+                'subject' => '{{contact.name|fname}}, obrigado por entrar em contato!',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL04 - LEAD JÁ É CLIENTE',
+                'subject' => '{{contact.name|fname}}, você merece um atendimento exclusivo!',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL05 - SOBRE O HUB',
+                'subject' => 'É hora de acelerarmos suas vendas, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] E-MAIL06 - Lembrete Agendar reunião',
+                'subject' => 'Ainda dá tempo de turbinar suas vendas com a MOB1',
+            ],
+        
+            [
+                'template' => '[PACK CONTEUDO] EMAIL03 :: Lead MQL',
+                'subject' => 'Potencialize sua operação vendendo em marketplaces',
+            ],
+        
+            [
+                'template' => 'EMAIL 1.0 - Boas Vindas + Link para LP Double Optin',
+                'subject' => 'Bem-vindo ao MOB1.CLUB, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => 'EMAIL 1.1 - Lembrete com BT Double Optin para confir. cadastro',
+                'subject' => 'Você viu meu e-mail, {{contact.name|fname}}?',
+            ],
+        
+            [
+                'template' => 'EMAIL 2.0 - Agradecimento + Infos sobre envio de Newsletter',
+                'subject' => 'Tudo pronto pra começar, {{contact.name|fname}}?',
+            ],
+        
+            [
+                'template' => 'EMAIL 2.1 - Redes Sociais',
+                'subject' => 'Tem um convite aqui para você, {{contact.name|fname}}!',
+            ],
+        
+            [
+                'template' => 'EMAIL-NOVO-MOB1-CLUB',
+                'subject' => '{{contact.name|fname}}, tudo está mudando muito rápido, você viu?',
+            ],
+        
+            [
+                'template' => 'Tag Teste',
+                'subject' => '',
+            ],
+        

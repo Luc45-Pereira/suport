@@ -1,0 +1,22 @@
+id,status,amount,updated_at,title,price,diference,dados_hub,difference
+MLB3257236411,active,76,2023-11-28T20:42:51.000Z,Filtro De Óleo Fiat Uno Argo Cronos Strada Pulse,55.9,,equal,equal
+MLB3257223465,active,755,2023-12-07T18:34:44.000Z,Tampa Do Reservatório De Água Do Radiador Fiat Palio,20.59,,{'price': 50.9},['price different']
+MLB3257249833,active,1181,2023-11-25T22:39:41.000Z,Tampa Do Abastecimento De Óleo Do Motor Fiat Fiorino Idea,21.9,,equal,equal
+MLB3257261739,active,815,2023-12-07T18:35:49.896Z,Filtro De Óleo Refil Fiat Idea Palio Siena Strada Doblo,29.1,,equal,equal
+MLB3257249819,paused,2,2023-10-10T19:41:53.664Z,Quebra Sol Lado Esquerdo Fiat Palio Siena Strada,45.85,,equal,equal
+MLB3257211673,active,820,2023-11-28T21:42:43.000Z,Limitador Da Porta Dianteira Fiat Uno Uno,62.63,,equal,equal
+MLB3257261765,paused,38,2023-12-18T07:32:11.148Z,Vela De Ignição Fiat Fiorino Palio Uno Punto Strada 500,32.9,,{'status': 'published'},['status different']
+MLB3257223457,active,769,2023-12-07T18:44:49.000Z,Friso Superior Da Tampa Traseira Fiat Strada,86.47,,{'price': 87.34},['price different']
+MLB3257186455,active,71,2023-11-28T05:31:53.000Z,Filtro De Óleo Fiat Strada Uno Palio Mobi,51.9,,equal,equal
+MLB3257261719,active,475,2023-11-28T21:41:04.000Z,Bucha Da Tampa Traseira Fiat Strada Toro,11.97,,equal,equal
+MLB3257236311,active,97,2023-11-25T22:01:57.000Z,Filtro De Combustível Fiat Fiorino Strada Toro Argo,30.65,,equal,equal
+MLB3257211627,active,213,2023-12-07T07:52:57.000Z,Coifa Homocinética Fiat Idea Palio Siena Strada Tipo Uno,59.42,,equal,equal
+MLB3257198679,active,414,2023-11-24T02:40:58.000Z,Cabo De Abertura Do Capô Fiat Punto,257.1,,equal,equal
+MLB3257211623,active,202,2023-12-11T14:12:28.000Z,Pino De Fixação Da Caixa Do Filtro De Ar Fiat Punto,8.0,,"{'amount': 242, 'price': 18.21}","['amount different', 'price different']"
+MLB3257272091,active,138,2023-12-07T18:36:15.000Z,Coxim Da Caixa Do Filtro De Ar Fiat Linea,10.17,,{'price': 20.05},['price different']
+MLB3257284639,active,255,2023-12-17T12:45:56.000Z,Guia Superior Da Coluna Porta Corrediça Fiat Doblo,24.26,,{'amount': 258},['amount different']
+MLB3257236313,paused,33,2023-10-03T17:26:17.042Z,Presilha De Fixação Fiat Strada,9.59,,equal,equal
+MLB3257211589,active,132,2023-12-11T17:37:29.000Z,Calota Central Da Roda Fiat Fiorino Strada Uno Doblo Uno,8.94,,"{'amount': 136, 'price': 21.64}","['amount different', 'price different']"
+MLB3257223347,active,1734,2023-12-07T18:34:39.000Z,Selo Do Bloco Do Motor Fiat Idea Uno 500 Uno Bravo Grand,24.34,,{'price': 37.64},['price different']
+MLB3257272113,active,549,2023-11-24T03:22:31.347Z,Filtro De Combustível Fiat Doblo Fiorino Idea Palio Siena,23.44,,equal,equal
+MLB3257236303,active,120,2023-11-24T02:21:42.000Z,Moldura Acabamento Do Forro Porta Dianteira Lado Esquerdo,27.69,,equal,equal

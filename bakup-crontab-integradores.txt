@@ -1,0 +1,19 @@
+SHELL=/bin/bash
+#53 15 * * * echo "teste de cron com sucesso tempo fixo"
+
+#HUB-SYNC-APOLLO
+0 */6 * * * ${HOME}/nvpc-hub-sync.sh "schedule@daily"
+0 0-22/2 * * * ${HOME}/nvpc-hub-sync.sh "schedule@apollo-product"
+0 1-23/2 * * * ${HOME}/nvpc-hub-sync.sh "schedule@apollo-product-reverse"
+
+#HUB-SYNC-DEALERNET
+*/30 4-23 * * * ${HOME}/nvpc-hub-sync.sh "schedule@product-reverse"
+0 0 * * 1-6 ${HOME}/nvpc-hub-sync.sh "schedule@product-incremental"
+0 0 * * 7 ${HOME}/nvpc-hub-sync.sh "schedule@product-full"
+
+#ORDER-SYNC (APOLLO e DEALERNET)
+*/5 * * * * ${HOME}/nvpc-hub-sync.sh "schedule@envia-pedido"
+#*/5 * * * * ${HOME}/httpd-gateway/bin/stage-make nvpc-hub-sync-dealernet-barigui.PROD.place "schedule@envia-pedido" > /dev/null 2>&1
+
+#ROTINA PARA PRIMEIRA CARGA (D.Workflow)
+0 20 24 11 * ${HOME}/httpd-gateway/bin/stage-make nvpc-hub-sync-dealernet-dinauto.PROD.place "schedule@primeira-carga-seller" > /dev/null 2>&1
