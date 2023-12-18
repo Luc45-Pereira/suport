@@ -5,7 +5,7 @@ import json
 import time
 
 url = 'https://api.mercadolibre.com/items/MLB123456789'
-token = 'APP_USR-5417402069385811-073013-9c6a93c0ecd16a4d208bf1e5e496b597-420633425'
+token = ''
 
 # lê o csv
 df = pd.read_csv('result.csv')
