@@ -1,0 +1,23 @@
+{
+    "database": "NBS",
+    "department": 0,
+    "division": 0,
+    "dms_seller_id": "11",
+    "exec_sync": "false",
+    "host": "10.13.50.1",
+    "password": "Inhub#22PM",
+    "pgto_id": 0,
+    "port": "1521",
+    "product_quantity": [
+    ],
+    "query_bloqued": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, '' as gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 35 as companyId, 137 as sellerId, '' as companyProductId, '' as corporationProductOfferId, '' slug FROM vw_product_sync WHERE securityGarageStock > 0 AND COD_EMPRESA = 21 AND COD_FORNECEDOR IN (1)",
+    "query_complete": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 35 as companyId, 137 as sellerId, ''  as companyProductId, '' as corporationProductOfferId, '' slug FROM nbs.vw_product_sync WHERE stock <> 0 AND COD_EMPRESA = 21 AND COD_FORNECEDOR IN (1)",
+    "query_daily": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, '' as gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 35 as companyId, 137 as sellerId, '' as companyProductId, '' as corporationProductOfferId, '' slug FROM vw_product_sync WHERE TO_CHAR(UPDATEDAT, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD') AND COD_EMPRESA = 21 AND COD_FORNECEDOR IN (1)",
+    "query_partial": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, '' as gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 35 as companyId, 137 as sellerId, '' as companyProductId, '' as corporationProductOfferId, '' slug FROM vw_product_sync WHERE updatedAt BETWEEN (sysdate - (5/24/60)) AND SYSDATE AND COD_EMPRESA = 21 AND COD_FORNECEDOR IN (1)",
+    "salesman": "",
+    "sector": 0,
+    "seller_id": "137",
+    "seller_name": "V. MUCHIUTT SELECT",
+    "user": "hubmob1",
+    "view_code": "WITH LAST_MOVE(SEQUENCIA, COD_ITEM, COD_EMPRESA, COD_FORNECEDOR)\r\nAS\r\n(\r\n  SELECT (SELECT MAX(SEQUENCIA) \r\n  FROM ITENS_HISTORICO ih2 \r\n  WHERE ih2.cod_empresa = ih.cod_empresa\r\n  and ih2.cod_fornecedor = ih.cod_fornecedor\r\n  and ih2.cod_item = ih.cod_item) as SEQUENCIA, \r\n  COD_ITEM, COD_EMPRESA, COD_FORNECEDOR \r\n  FROM ITENS_HISTORICO ih \r\n  GROUP BY COD_ITEM, COD_EMPRESA, COD_FORNECEDOR\r\n \r\n)\r\nSELECT\r\nio.Sequencia  \r\n, io.COD_ITEM productId\r\n, io.COD_EMPRESA \r\n, io.COD_FORNECEDOR \r\n, i.DESCRICAO name\r\n, COALESCE (i.PART_NUMBER, i.COD_ITEM) mpn\r\n, fe.NOME_FORNECEDOR brand\r\n, i.COD_GTIN gtin\r\n, COALESCE ((io.QTDE_DEPOIS - COALESCE(e.RESERVADO, 0)), 0) stock\r\n, COALESCE (e.RESERVADO, 0) securityGarageStock\r\n, COALESCE (e.PENDENTE, 0) blockedGarageStock\r\n, ic.PRECO_ORIGINAL purchasePrice purchasePrice\r\n, ic.PRECO_VENDA sellPrice\r\n, COALESCE (ic.PRECO_MINIMO, ic.PRECO_VENDA) listPrice\r\n, io.DATA updatedAt\r\n, CASE\r\n     WHEN igi.DESCRICAO LIKE '%Pecas%' THEN 'PEÇAS'\r\n     WHEN igi.DESCRICAO LIKE '%Acessorio%' THEN 'ACESSÓRIOS'\r\n     WHEN igi.DESCRICAO LIKE '%Lubrificantes%' THEN 'LUBRIFICANTES'\r\n     WHEN igi.DESCRICAO LIKE '%Pneus%' THEN 'PNEUS'\r\n     ELSE igi.DESCRICAO\r\n     END tipo_estoque,\r\n SUBSTR(\r\n    icc.DESCRICAO,\r\n    INSTR(icc.DESCRICAO,'_')+1,\r\n    LENGTH(icc.DESCRICAO)\r\n    ) as category\r\nFROM \r\nLAST_MOVE lv\r\nINNER JOIN ITENS_HISTORICO io ON io.SEQUENCIA = lv.SEQUENCIA \r\n      AND io.COD_ITEM = lv.COD_ITEM\r\n      AND io.Cod_Fornecedor = lv.COD_FORNECEDOR\r\n      AND IO.COD_EMPRESA = lv.cod_empresa\r\nLEFT JOIN OPERACOES o ON o.COD_OPERACAO = io.COD_OPERACAO AND o.COD_EMPRESA = io.COD_EMPRESA\r\nLEFT JOIN ESTOQUE e ON E.COD_ITEM = IO.COD_ITEM AND E.COD_EMPRESA = IO.COD_EMPRESA\r\nINNER JOIN ITENS i ON i.COD_ITEM = io.COD_ITEM\r\nINNER JOIN FORNECEDOR_ESTOQUE fe ON fe.COD_FORNECEDOR = io.COD_FORNECEDOR \r\nINNER JOIN ITENS_CUSTOS ic ON ic.COD_ITEM = i.COD_ITEM AND io.COD_EMPRESA = ic.COD_EMPRESA AND io.COD_FORNECEDOR = ic.COD_FORNECEDOR \r\nINNER JOIN ITENS_GRUPO_INTERNO igi ON igi.COD_GRUPO_INTERNO = i.COD_GRUPO_INTERNO \r\nINNER JOIN ITENS_CLASSE_CONTABIL icc ON icc.COD_CLASSE_CONTABIL = i.COD_CLASSE_CONTABIL \r\nWHERE\r\ni.STATUS = 'A'\r\nAND igi.COD_GRUPO_INTERNO IN (26, 28, 600)\r\n--AND icc.COD_CLASSE_CONTABIL IN ('1','5','3','10')\r\nAND io.COD_EMPRESA = 2\r\nAND io.COD_FORNECEDOR in (1, 2)"
+   }

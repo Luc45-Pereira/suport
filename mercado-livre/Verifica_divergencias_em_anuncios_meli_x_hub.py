@@ -44,10 +44,11 @@ def get_title(response):
         return False
 
 def get_price(response):
+    if 'original_price' in response and response['original_price'] != None:
+        return response['original_price']
     if 'price' in response:
         return response['price']
-    else:
-        return False
+    return False
     
 def get_csv():
     df = pd.read_csv('ids.csv')
@@ -61,7 +62,8 @@ def verify_diferences_in_ads_and_csv(ad, csv):
         list_diferences.append('amount different')
     if str(ad['title']).lower() != str(csv['title']).lower():
         list_diferences.append('title different')
-    if int(ad['price']) != int(csv['price']):
+
+    if ad['price'] != csv['price']:
         list_diferences.append('price different')
     if list_diferences:
         return list_diferences
@@ -86,10 +88,10 @@ def main():
     ids = get_ids_from_CSV()
     data_frame_result = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at', 'title', 'price', 'diference', 'dados_hub'])
     data_frame_error = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at', 'title', 'price', 'diference', 'dados_hub'])
-    adsActive = []
-    adsNotActive = []
     adsNotActiveIds = []
+    print('Total de anúncios: ', len(ids))
     for id in ids:
+        print('Restantes: ', len(ids) - ids.index(id), end='\r')
         csv = pd.read_csv('ids.csv')
         response = getAdFromML(id)
         if response == False:
@@ -106,15 +108,11 @@ def main():
         diference = verify_diferences_in_ads_and_csv(ad, csv)
         diference_hub = get_diferences_in_csv(csv, diference)
         if status:
-            if status == 'active':
-                print('Anúncio ativo')
-                print('Quantidade: ', amount)
-
             data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[id], 'status': [status], 'amount': [amount], 'updated_at': [updated_at], 'title': [title], 'price': [price], 'difference': [diference], 'dados_hub': [diference_hub]})], axis=0)
         else:
             data_frame_error = pd.concat([data_frame_error, pd.DataFrame({'id':[id], 'status': [response], 'amount': [''], 'updated_at': [''], 'title': [''], 'price': [''], 'diference': [diference], 'dados_hub': [diference_hub]})], axis=0)
             adsNotActiveIds.append(id)
-
+    print("Concluído!")
     data_frame_result.to_csv('result.csv', index=False)
     data_frame_error.to_csv('error.csv', index=False)
 

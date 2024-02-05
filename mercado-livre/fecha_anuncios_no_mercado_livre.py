@@ -5,13 +5,13 @@ import json
 import time
 
 url = 'https://api.mercadolibre.com/items/MLB123456789'
-token = 'APP_USR-5417402069385811-073013-9c6a93c0ecd16a4d208bf1e5e496b597-420633425'
+# token = 'APP_USR-5417402069385811-073013-9c6a93c0ecd16a4d208bf1e5e496b597-420633425'
 
 # lê o csv
-df = pd.read_csv('result.csv')
+df = pd.read_csv('ads.csv')
 
 # cria uma lista com os ids dos anúncios
-ids = df['id'].tolist()
+ids = df['external_id'].tolist()
 
 # cria um dataframe para armazenar os resultados
 data_frame_result = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at'])
@@ -22,11 +22,11 @@ data_frame_error = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at',
 # cria uma lista para armazenar os ids dos anúncios que não estão no mercado livre
 adsNotActiveIds = []
 
-# pausa os anúncios que no mercado livre
+# pausa os anúncios no mercado livre
 for id in ids:
     try:
-        url = f'https://api.mercadolibre.com/items/{id}?access_token={token}'
-        json = {'status': 'closed'}
+        url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-101009-30b3624d02bed5053f811276d3758be8-553373958'
+        json = {'status': 'paused', 'available_quantity': 0}
         response = requests.put(url, json=json)
     except:
         print('Erro ao buscar anúncio no ML')
@@ -42,8 +42,8 @@ for id in ids:
         print('Erro 429: muitas requisições')
         time.sleep(20)
         try:
-            url = f'https://api.mercadolibre.com/items/{id}?access_token={token}'
-            json = {'status': 'closed'}
+            url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-101009-30b3624d02bed5053f811276d3758be8-553373958'
+            json = {'status': 'paused', 'available_quantity': 0}
             response = requests.put(url, json=json)
         except:
             print('Erro ao buscar anúncio no ML')
@@ -58,8 +58,8 @@ for id in ids:
     response = response.json()
     if 'status' in response:
         print('status do anúncio: ', response['status'])
-        if response['status'] == 'active':
-            print('Anúncio ativo')
+        if response['status'] == 'paused':
+            print('Anúncio pausado')
             print('Quantidade: ', response['available_quantity'])
         data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[id], 'status': [response['status']], 'amount': [response['available_quantity']], 'updated_at': [response['last_updated']]})], axis=0)
     else:

@@ -1,0 +1,20 @@
+# Container Python 3.11
+version: '3.3'
+services:
+  python:
+    image: python:3.11
+    command: tail -f /dev/null
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    volumes:
+      - ./:/app
+    ports:
+      - 5000:5000
+    networks:
+      - backend
+networks:
+  backend:
+    name: backendNetwork
+    external: true

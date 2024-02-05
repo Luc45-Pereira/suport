@@ -2,7 +2,7 @@
   
 // Complex array 
 $myvar = [
-    "total_payments_paid_amount" => 249.4
+    "total_payments_paid_amount" => 247.73,
 ]; 
   
 // Convert to a string 

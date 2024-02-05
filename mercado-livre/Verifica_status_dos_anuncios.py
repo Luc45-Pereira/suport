@@ -15,7 +15,7 @@ def getAdFromML(id, token):
 
 def getIdsFromCSV():
     print('Lendo ids do csv')
-    df = pd.read_csv('ids.csv')
+    df = pd.read_csv('ids_seller.csv')
     df = df[['external_id']]
     return df['external_id'].tolist()
 
@@ -28,11 +28,11 @@ def verify_status_ad(response):
         return False
 
 def create_data_frame_result():
-    data_frame_result = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at'])
+    data_frame_result = pd.DataFrame(columns=['id'])
     return data_frame_result
 
 def insert_in_csv_data_frame_result(data_frame_result, id, status, amount = '', updated_at = ''):
-    data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[id], 'status': [status], 'amount': [amount], 'updated_at': [updated_at]})], axis=0)
+    data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[f'{id},']})], axis=0)
     return data_frame_result
 
 def main():
@@ -48,12 +48,13 @@ def main():
             data_frame_error = insert_in_csv_data_frame_result(data_frame_error, id, 'Erro ao buscar anúncio no ML')
             continue
         status = verify_status_ad(response)
-        amount = response['available_quantity']
-        updated_at = response['last_updated']
+        # amount = response['available_quantity']
+        amount = 0
+        updated_at = response['last_updated'] if 'last_updated' in response else ''
         if status:
             if status == 'active':
                 print('Anúncio ativo')
-                print('Quantidade: ', amount)
+                # print('Quantidade: ', amount)
             data_frame_result = insert_in_csv_data_frame_result(data_frame_result, id, status, amount, updated_at)
         else:
             data_frame_error = insert_in_csv_data_frame_result(data_frame_error, id, response)

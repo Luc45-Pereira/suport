@@ -1,0 +1,2 @@
+id,status,amount,updated_at,error
+MLB2799924861,Erro ao pausar anúncio no ML,,,"{'message': '', 'error': 'too_many_requests', 'status': 429, 'cause': []}"
