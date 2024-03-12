@@ -10,6 +10,8 @@ url = 'https://api.mercadolibre.com/items/MLB123456789'
 # lê o csv
 df = pd.read_csv('ads.csv')
 
+token = df['access_token'][0]
+
 # cria uma lista com os ids dos anúncios
 ids = df['external_id'].tolist()
 
@@ -23,9 +25,10 @@ data_frame_error = pd.DataFrame(columns=['id', 'status', 'amount', 'updated_at',
 adsNotActiveIds = []
 
 # pausa os anúncios no mercado livre
-for id in ids:
+for i, token in df.iterrows():
+    id = token[0]
     try:
-        url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-101009-30b3624d02bed5053f811276d3758be8-553373958'
+        url = f'https://api.mercadolibre.com/items/{id}?access_token={token[1]}'
         json = {'status': 'paused', 'available_quantity': 0}
         response = requests.put(url, json=json)
     except:
@@ -42,7 +45,7 @@ for id in ids:
         print('Erro 429: muitas requisições')
         time.sleep(20)
         try:
-            url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-101009-30b3624d02bed5053f811276d3758be8-553373958'
+            url = f'https://api.mercadolibre.com/items/{id}?access_token={token[1]}'
             json = {'status': 'paused', 'available_quantity': 0}
             response = requests.put(url, json=json)
         except:
