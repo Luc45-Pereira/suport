@@ -1,25 +1,303 @@
 {
-    "database": "NBS",
-    "department": 4,
-    "division": 7,
-    "dms_seller_id": "17",
-    "exec_sync": "false",
-    "host": "db-nbs.intranet.local",
-    "order_client_only": true,
-    "password": "new",
-    "pgto_id": 130,
-    "port": "1521",
-    "product_quantity": [
+    "id": "MLB1710600370",
+    "site_id": "MLB",
+    "title": "Junta Do Coletor De Admissão Original Renault Master",
+    "seller_id": 223515709,
+    "category_id": "MLB193478",
+    "user_product_id": null,
+    "official_store_id": 1604,
+    "price": 41.96,
+    "base_price": 41.96,
+    "original_price": null,
+    "inventory_id": null,
+    "currency_id": "BRL",
+    "initial_quantity": 18,
+    "available_quantity": 18,
+    "sold_quantity": 0,
+    "sale_terms": [
+        {
+            "id": "WARRANTY_TIME",
+            "name": "Tempo de garantia",
+            "value_id": null,
+            "value_name": "90 dias",
+            "value_struct": {
+                "number": 90,
+                "unit": "dias"
+            },
+            "values": [
+                {
+                    "id": null,
+                    "name": "90 dias",
+                    "struct": {
+                        "number": 90,
+                        "unit": "dias"
+                    }
+                }
+            ],
+            "value_type": "number_unit"
+        },
+        {
+            "id": "WARRANTY_TYPE",
+            "name": "Tipo de garantia",
+            "value_id": "2230280",
+            "value_name": "Garantia do vendedor",
+            "value_struct": null,
+            "values": [
+                {
+                    "id": "2230280",
+                    "name": "Garantia do vendedor",
+                    "struct": null
+                }
+            ],
+            "value_type": "list"
+        }
     ],
-    "query_bloqued": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 31 as companyId, 232 as sellerId, ''  as companyProductId, '' as corporationProductOfferId, '' slug FROM nbs.vw_product_sync WHERE securityGarageStock <> 0 AND COD_EMPRESA = 17 AND COD_FORNECEDOR IN (11, 1)",
-    "query_complete": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 31 as companyId, 232 as sellerId, ''  as companyProductId, '' as corporationProductOfferId, '' slug FROM nbs.vw_product_sync WHERE stock <> 0 AND COD_EMPRESA = 17 AND COD_FORNECEDOR IN (11, 1)",
-    "query_daily": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, '' as gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 31 as companyId, 232 as sellerId, '' as companyProductId, '' as corporationProductOfferId, '' slug FROM nbs.vw_product_sync WHERE TO_DATE(UpdatedAt) >= TO_DATE(SYSDATE-3) AND COD_EMPRESA = 17 AND COD_FORNECEDOR IN (11, 1)",
-    "query_partial": "SELECT RTRIM(LTRIM(productId)) as productId, RTRIM(LTRIM(mpn)) AS mpn, brand, name, category, '' as gtin, stock as stock, blockedGarageStock, securityGarageStock, purchasePrice, sellPrice, sellPrice as listPrice, 31 as companyId, 232 as sellerId, '' as companyProductId, '' as corporationProductOfferId, '' slug FROM nbs.vw_product_sync WHERE updatedAt BETWEEN (sysdate - (10/24/60)) AND SYSDATE AND COD_EMPRESA = 17 AND COD_FORNECEDOR IN (11, 1)",
-    "salesman": "PCANAELY",
-    "sector": 8,
-    "seller_id": "232",
-    "seller_name": "TONIELLO - ORTOVEL FORD RIBEIRÃO(NOVA)",
-    "user": "nbs",
-    "use_module_parts": true,
-    "view_code": "CREATE VIEW vw_product_sync AS\nWITH CARDEX_SALDO(COD_ITEM, COD_FORNECEDOR, COD_EMPRESA, DATA)\nAS\n(\n  SELECT\n  CARDEX_CONTABIL.COD_ITEM,\n  CARDEX_CONTABIL.COD_FORNECEDOR,\n  CARDEX_CONTABIL.COD_EMPRESA,\n  MAX(DATA) AS DATA\n  FROM CARDEX_CONTABIL\n  WHERE CARDEX_CONTABIL.STATUS = 'A'\n  GROUP BY\n  CARDEX_CONTABIL.COD_ITEM,\n  CARDEX_CONTABIL.COD_FORNECEDOR,\n  CARDEX_CONTABIL.COD_EMPRESA\n),\nREQUISICOES(COD_ITEM, COD_FORNECEDOR, COD_EMPRESA, QTDE_OFICINA)\nAS\n(\n  SELECT OS_REQUISICOES.COD_ITEM,\n  OS_REQUISICOES.COD_FORNECEDOR,\n  OS_REQUISICOES.COD_EMPRESA,\n  SUM(OS_REQUISICOES.QUANTIDADE)\n  FROM OS_REQUISICOES\n  INNER JOIN OS ON OS.COD_EMPRESA = OS_REQUISICOES.COD_EMPRESA\n    AND OS.NUMERO_OS = OS_REQUISICOES.NUMERO_OS\n  WHERE\n  (\n    (OS.STATUS_OS = '0') OR\n    ((OS.STATUS_OS = '1') AND (OS.DATA_ENCERRADA > TO_DATE(SYSDATE, 'DD/MM/YYYY')))\n  )\n  AND OS_REQUISICOES.DATA <= TO_DATE(SYSDATE, 'DD/MM/YYYY')\n  GROUP BY\n  OS_REQUISICOES.COD_ITEM,\n  OS_REQUISICOES.COD_FORNECEDOR,\n  OS_REQUISICOES.COD_EMPRESA\n)\nSELECT\nITENS.COD_ITEM productId, \n  CARDEX_SALDO.COD_EMPRESA,\n  CARDEX_SALDO.COD_FORNECEDOR,\n  ITENS.DESCRICAO name,\n  COALESCE(ITENS.PART_NUMBER,ITENS.COD_ITEM) as mpn,\n  FORNECEDOR_ESTOQUE.NOME_FORNECEDOR as brand,\n  ITENS.COD_GTIN AS gtin,\n  (COALESCE(cardex_contabil.qtde_saldo_estoque,0) - COALESCE(ESTOQUE.RESERVADO, 0)) as stock,\n  COALESCE(ESTOQUE.RESERVADO, 0) as securityGarageStock,\n  COALESCE(REQUISICOES.QTDE_OFICINA,0) AS blockedGarageStock,\n  COALESCE(CARDEX_CONTABIL.CUSTO_RESULTANTE,0) purchasePrice,\n  COALESCE(ITENS_CUSTOS.PRECO_VENDA,0) as sellPrice,\n  COALESCE(ITENS_CUSTOS.PRECO_MINIMO,ITENS_CUSTOS.PRECO_VENDA) as listPrice,\n  GREATEST(\n\t\tCOALESCE(CARDEX_CONTABIL.DATA, TO_DATE('2021-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')), \n\t\tCOALESCE(CARDEX_CONTABIL.DATA_CREATED, TO_DATE('2021-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS')), \n\t\tCOALESCE(ESTOQUE.UPDATED_AT,TO_DATE('2021-01-01 00:00:00', 'YYYY-MM-DD HH24:MI:SS'))\n\t) as updatedAt,\n  CASE\n     WHEN ITENS_GRUPO_INTERNO.DESCRICAO LIKE '%Pecas%' THEN 'PEÇAS'\n     WHEN ITENS_GRUPO_INTERNO.DESCRICAO LIKE '%Acessorio%' THEN 'ACESSÓRIOS'\n     WHEN ITENS_GRUPO_INTERNO.DESCRICAO LIKE '%Lubrificantes%' THEN 'LUBRIFICANTES'\n     WHEN ITENS_GRUPO_INTERNO.DESCRICAO LIKE '%Pneus%' THEN 'PNEUS'\n     ELSE ITENS_GRUPO_INTERNO.DESCRICAO\n     END tipo_estoque,\n SUBSTR(\n    ITENS_CLASSE_CONTABIL.DESCRICAO,\n    INSTR(ITENS_CLASSE_CONTABIL.DESCRICAO,'_')+1,\n    LENGTH(ITENS_CLASSE_CONTABIL.DESCRICAO)\n    ) as category\nFROM  CARDEX_SALDO\nINNER JOIN ITENS ON CARDEX_SALDO.COD_ITEM = ITENS.COD_ITEM\nINNER JOIN ITENS_CUSTOS ON ITENS_CUSTOS.COD_ITEM = CARDEX_SALDO.COD_ITEM\n  AND ITENS_CUSTOS.COD_EMPRESA = CARDEX_SALDO.COD_EMPRESA\n  AND ITENS_CUSTOS.COD_FORNECEDOR = CARDEX_SALDO.COD_FORNECEDOR\nINNER JOIN FORNECEDOR_ESTOQUE ON FORNECEDOR_ESTOQUE.COD_FORNECEDOR = CARDEX_SALDO.COD_FORNECEDOR\nINNER JOIN CARDEX_CONTABIL ON CARDEX_CONTABIL.DATA = CARDEX_SALDO.DATA\n\tAND CARDEX_CONTABIL.COD_ITEM = CARDEX_SALDO.COD_ITEM\nLEFT JOIN ESTOQUE ON CARDEX_SALDO.COD_ITEM = ESTOQUE.COD_ITEM\n\tAND CARDEX_SALDO.COD_FORNECEDOR = ESTOQUE.COD_FORNECEDOR\n\tAND CARDEX_SALDO.COD_EMPRESA = ESTOQUE.COD_EMPRESA\nLEFT JOIN REQUISICOES ON REQUISICOES.COD_ITEM = CARDEX_SALDO.COD_ITEM\n\tAND REQUISICOES.COD_FORNECEDOR = CARDEX_SALDO.COD_FORNECEDOR\n\tAND REQUISICOES.COD_EMPRESA = CARDEX_SALDO.COD_EMPRESA\nINNER JOIN ITENS_GRUPO_INTERNO ON ITENS_GRUPO_INTERNO.COD_GRUPO_INTERNO = ITENS.COD_GRUPO_INTERNO\nINNER JOIN ITENS_CLASSE_CONTABIL ON ITENS_CLASSE_CONTABIL.COD_CLASSE_CONTABIL = ITENS.COD_CLASSE_CONTABIL\nWHERE\nITENS.STATUS = 'A'\nAND ITENS_GRUPO_INTERNO.COD_GRUPO_INTERNO  IN (3, 4, 5, 8, 12, 15, 13, 19, 28, 31, 10, 17, 18)\nAND CARDEX_SALDO.COD_EMPRESA IN (2, 11, 30, 1)\nand CARDEX_SALDO.COD_FORNECEDOR IN (1,2,5,6)"
-   }
+    "buying_mode": "buy_it_now",
+    "listing_type_id": "gold_pro",
+    "start_time": "2020-11-06T20:25:45.000Z",
+    "stop_time": "2040-11-01T04:00:00.000Z",
+    "end_time": "2040-11-01T04:00:00.000Z",
+    "expiration_time": "2024-06-30T19:29:00.163Z",
+    "condition": "new",
+    "permalink": "http://produto.mercadolivre.com.br/MLB-1710600370-junta-do-coletor-de-admisso-original-renault-master-_JM",
+    "pictures": [
+        {
+            "id": "663792-MLB75574576208_042024",
+            "url": "http://http2.mlstatic.com/resources/frontend/statics/processing-image/1.0.0/O-PT.jpg",
+            "secure_url": "https://http2.mlstatic.com/resources/frontend/statics/processing-image/1.0.0/O-PT.jpg",
+            "size": "500x500",
+            "max_size": "500x500",
+            "quality": ""
+        }
+    ],
+    "video_id": null,
+    "descriptions": [],
+    "accepts_mercadopago": true,
+    "non_mercado_pago_payment_methods": [],
+    "shipping": {
+        "mode": "me2",
+        "local_pick_up": true,
+        "free_shipping": false,
+        "methods": [],
+        "dimensions": null,
+        "tags": [],
+        "logistic_type": "cross_docking",
+        "store_pick_up": false
+    },
+    "international_delivery_mode": "none",
+    "seller_address": {
+        "id": 191475972,
+        "comment": "FORMULA RENAULT MARECHAL",
+        "address_line": "Rua Antônio Parolin Júnior 72",
+        "zip_code": "80220350",
+        "city": {
+            "id": "TUxCQ0NVUjYyZmY1",
+            "name": "Curitiba"
+        },
+        "state": {
+            "id": "BR-PR",
+            "name": "Paraná"
+        },
+        "country": {
+            "id": "BR",
+            "name": "Brasil"
+        },
+        "latitude": -25.4610166,
+        "longitude": -49.25606029999999,
+        "search_location": {
+            "neighborhood": {
+                "id": "TUxCQkJPQTI4NzBE",
+                "name": "Boa Vista"
+            },
+            "city": {
+                "id": "TUxCQ0NVUjYyZmY1",
+                "name": "Curitiba"
+            },
+            "state": {
+                "id": "TUxCUFBBUkExODBlZA",
+                "name": "Paraná"
+            }
+        }
+    },
+    "seller_contact": null,
+    "location": {},
+    "geolocation": {
+        "latitude": -25.4610166,
+        "longitude": -49.25606029999999
+    },
+    "coverage_areas": [],
+    "attributes": [
+        {
+            "id": "ITEM_CONDITION",
+            "name": "Condição do item",
+            "value_id": "2230284",
+            "value_name": "Novo",
+            "values": [
+                {
+                    "id": "2230284",
+                    "name": "Novo",
+                    "struct": null
+                }
+            ],
+            "value_type": "list"
+        },
+        {
+            "id": "GASKET_TYPE",
+            "name": "Tipo de junta",
+            "value_id": "15283572",
+            "value_name": "Motor",
+            "values": [
+                {
+                    "id": "15283572",
+                    "name": "Motor",
+                    "struct": null
+                }
+            ],
+            "value_type": "list"
+        },
+        {
+            "id": "MPN",
+            "name": "MPN",
+            "value_id": null,
+            "value_name": "8200363223",
+            "values": [
+                {
+                    "id": null,
+                    "name": "8200363223",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "SELLER_SKU",
+            "name": "SKU",
+            "value_id": null,
+            "value_name": "8200363223",
+            "values": [
+                {
+                    "id": null,
+                    "name": "8200363223",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "PART_NUMBER",
+            "name": "Número de peça",
+            "value_id": null,
+            "value_name": "8200363223",
+            "values": [
+                {
+                    "id": null,
+                    "name": "8200363223",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "VEHICLE_TYPE",
+            "name": "Tipo de veículo",
+            "value_id": "11377043",
+            "value_name": "Carro/Caminhonete",
+            "values": [
+                {
+                    "id": "11377043",
+                    "name": "Carro/Caminhonete",
+                    "struct": null
+                }
+            ],
+            "value_type": "list"
+        },
+        {
+            "id": "BRAND",
+            "name": "Marca",
+            "value_id": "9909",
+            "value_name": "Renault",
+            "values": [
+                {
+                    "id": "9909",
+                    "name": "Renault",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "GTIN",
+            "name": "Código universal de produto",
+            "value_id": null,
+            "value_name": "7891120332736",
+            "values": [
+                {
+                    "id": null,
+                    "name": "7891120332736",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "ORIGIN",
+            "name": "Origem",
+            "value_id": "97214",
+            "value_name": "Brasil",
+            "values": [
+                {
+                    "id": "97214",
+                    "name": "Brasil",
+                    "struct": null
+                }
+            ],
+            "value_type": "string"
+        },
+        {
+            "id": "HAS_COMPATIBILITIES",
+            "name": "Tem compatibilidades",
+            "value_id": "242085",
+            "value_name": "Sim",
+            "values": [
+                {
+                    "id": "242085",
+                    "name": "Sim",
+                    "struct": null
+                }
+            ],
+            "value_type": "boolean"
+        }
+    ],
+    "warnings": [],
+    "listing_source": "",
+    "variations": [],
+    "thumbnail_id": "663792-MLB75574576208_042024",
+    "thumbnail": "http://http2.mlstatic.com/resources/frontend/statics/processing-image/1.0.0/I-PT.jpg",
+    "status": "paused",
+    "sub_status": [
+        "picture_download_pending"
+    ],
+    "tags": [
+        "brand_verified",
+        "cart_eligible",
+        "good_quality_picture",
+        "good_quality_thumbnail",
+        "immediate_payment"
+    ],
+    "warranty": "Garantia do vendedor: 90 dias",
+    "catalog_product_id": null,
+    "domain_id": "MLB-VEHICLE_ENGINE_GASKETS",
+    "seller_custom_field": null,
+    "parent_item_id": null,
+    "differential_pricing": null,
+    "deal_ids": [],
+    "automatic_relist": false,
+    "date_created": "2020-11-06T20:25:45.000Z",
+    "last_updated": "2024-04-11T19:29:00.257Z",
+    "health": 0.75,
+    "catalog_listing": false,
+    "item_relations": [],
+    "channels": [
+        "marketplace"
+    ]
+}

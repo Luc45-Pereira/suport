@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+import requests
 import time
 import argparse
 import logging
@@ -22,20 +23,23 @@ class Manager():
 
     def __init__(self, token):
         self.token = token
+        self.results = []
+        self.total = True
+        self.offset = 0
+        
     
     async def get_infracoes(self, session, days_ago, o, limit, seller_id):
         self.offset = o
         while self.total:
-            tasks = [self.get_from_route(session, offset, limit, seller_id) for offset in range(self.offset, self.offset + 25 * limit, limit)]
+            tasks = [self.get_from_route(session, offset, limit, seller_id) for offset in range(self.offset, self.offset + 20 * limit, limit)]
             await asyncio.gather(*tasks)
         return self.results
     
     async def get_from_route(self, session, offset, limit, seller_id):
-        print(f"Offset: {offset} - Limit: {limit}")
         if not self.total:
             return []
         
-        async with session.get(f'{self.url}/moderations/infractions/{seller_id}?limit={limit}&offset={offset}&filter_subgroup=PQT', ssl=False) as response:
+        async with session.get(f'{self.url}/moderations/infractions/{seller_id}?limit={limit}&offset={offset}', ssl=False) as response:
             if 200 == response.status:
                 logger.info(f"Get ads - Status: {response.status}")
                 response_json = await response.json()
@@ -47,10 +51,11 @@ class Manager():
                 
                 for infraction in response_json['infractions']:
                     if infraction['related_item_id']:
-                        logger.info(f"Infraction found: {infraction}")
+                        print(f"Infraction found: {infraction}, total: {response_json['paging']['total']}, offset: {response_json['paging']['offset']}, limit: {response_json['paging']['limit']}")
                         self.results.append(infraction)
                 self.offset += 20
-                self.total = True if response_json['paging']['total'] > (response_json['paging']['offset'] + response_json['paging']['limit'] ) and offset < 5000 else False
+                self.total = True if response_json['paging']['total'] > (response_json['paging']['offset'] + response_json['paging']['limit'] ) and offset < 10000 else False
+                print(f"Offset: {offset} - Limit: {limit} - total: {response_json['paging']['total']} - offset: {response_json['paging']['offset']} - limit: {response_json['paging']['limit']}")
                 return
             else:
                 response_json = await response.json()
@@ -109,10 +114,13 @@ async def busca_anuncios_com_infracoes(token = None, days_ago = DAYS_AGO, offset
     initial_time = time.time()
 
     ads = le_csv_com_tokens()
+    ads_id = pd.read_csv('anuncios.csv', sep=';')
     listagem = []
     invalid_tokens = []
-    df_result = pd.DataFrame(columns=['ad_id', 'mpn', 'reason', 'remedy'])
+    
+    df_error = pd.DataFrame(columns=['ad_id', 'error'])
     for i, token in ads.iterrows():
+        df_result = pd.DataFrame(columns=['ad_id', 'seller', 'mpn', 'reason', 'remedy'])
         try:
             # if len(listagem) > 5000:
             #     break
@@ -131,23 +139,105 @@ async def busca_anuncios_com_infracoes(token = None, days_ago = DAYS_AGO, offset
             }
             manager = Manager(token[3])
             async with aiohttp.ClientSession(headers=headers) as session:
-                async with session.get(f'{DEAFAULT_URL}/moderations/infractions/{seller_id}?related_item_id={token[0]}&filter_subgroup=PQT', ssl=False) as response:
-                    if 200 == response.status:
-                        response_json = await response.json()
-                        if not response_json['infractions']:
-                            continue
-                        for infraction in response_json['infractions']:
-                            df_result = pd.concat([df_result, pd.DataFrame({'ad_id':[token[0]], 'mpn': [token[2]], 'reason': [infraction['reason']], 'remedy': [infraction['remedy']]})], axis=0)
-                        listagem.append(response_json['infractions'])
-                        
-                    else:
-                        response_json = await response.json()
-                        logger.error(f"Error: {response.status} - {response_json} - url: {response.url}")
+                results = await manager.get_infracoes(session, days_ago, offset, limit, seller_id)
+                count_results = len(results)
+                infraction_related_item_id = ''
+                i = 0
+                print(f"Results: {count_results}")
+                items = {}
 
+                for infraction in results:
+                    items[infraction['related_item_id']] = items[infraction['related_item_id']] + 1 if infraction['related_item_id'] in items else 1
+                    if items[infraction['related_item_id']] >= 5:
+                        continue
+
+                    try:
+                        # async with session.get(f'{DEAFAULT_URL}/items/{infraction["related_item_id"]}', ssl=False) as response:
+                        response = requests.get(f'{DEAFAULT_URL}/items/{infraction["related_item_id"]}?access_token={token[3]}')
+                        print(f"Response: {response.status_code} - url: {response.url}")
+                        is_nvpc_ad = 'nao' if infraction['related_item_id'] not in ads_id['external_id'].values else 'sim'
+
+                        if 200 == response.status_code:
+                            response_json = response.json()
+                            if not response_json:
+                                continue
+                            print(f"Buscando atributo")
+                            mpn = "Anúncio sem MPN"
+                            if 'attributes' in response_json:
+                                for attribute in response_json['attributes']:
+                                    if attribute['id'] == 'MPN':
+                                        mpn = attribute['value_name']
+                                    elif attribute['id'] == 'PART_NUMBER':
+                                        partnumber = attribute['value_name']
+                                    continue
+                                mpn = mpn if mpn != partnumber and mpn != "Anúncio sem MPN" else partnumber
+                            suggestion = True
+                            print(f"Buscando categorias")
+                            if 'suggested' not in infraction:
+                                suggestion = False
+                                categories_suggested = "Sem sugestão de categoria"
+                            print(f"Buscando categorias")
+                            categories_suggested = "Sem sugestão de categoria"
+                            if suggestion != False:
+                                print(f"Buscando sugestão de categoria")
+                                print(f"Infraction: {infraction['suggested']}")
+                                print(f"Categorias: {infraction['suggested']['categories']}")
+                                if 'categories' in infraction['suggested']:
+                                    print(f"Categories: {infraction['suggested']['categories']}")
+                                    categories_suggested = [x['path'] for x in infraction['suggested']['categories']]
+                                # for suggested in infraction['suggested']:
+                                #     print(f'ad_id: {infraction["related_item_id"]}')
+                                #     print(f"Suggested: {suggested}")
+                                #     categories_suggested = []
+                                #     if 'categories' in suggested:
+                                #         print(f"Categories: {suggested['categories']}")
+                                #         for categories in suggested['categories']:
+                                #             print(f"Categories: {categories}")
+                                #             categories_suggested = [x['path'] for x in categories]
+                                        
+                                    if categories_suggested == []:
+                                        categories_suggested = "Sem sugestão de categoria"
+
+                            is_nvpc_ad = 'nao' if infraction['related_item_id'] not in ads_id['external_id'].values else 'sim'
+                            if mpn == "Anúncio sem MPN" and is_nvpc_ad == 'sim':
+                                mpn = ads_id.loc[ads_id['external_id'] == infraction['related_item_id'], 'mpn'].values[0]
+                            print(f"Is_nvpc_ad: {is_nvpc_ad} Ad ID: {infraction['related_item_id']} - MPN: {mpn} - Reason: {infraction['reason']} - Remedy: {infraction['remedy']} - Suggested: {categories_suggested}")
+                            
+                            df_result = pd.concat([df_result, pd.DataFrame({'ad_id':[infraction['related_item_id']], 'seller_id': [infraction['user_id']],'anuncio_nvpc?':[is_nvpc_ad],'seller': [token[1]] ,'mpn': [mpn], 'reason': [infraction['reason']], 'remedy': [infraction['remedy']], 'suggestion': [categories_suggested]})], axis=0)
+                        elif is_nvpc_ad == 'sim':
+                            
+                            mpn = ads_id.loc[ads_id['external_id'] == infraction['related_item_id'], 'mpn'].values[0]
+                            df_result = pd.concat([df_result, pd.DataFrame({'ad_id':[infraction['related_item_id']], 'seller_id': [infraction['user_id']],'anuncio_nvpc?':[is_nvpc_ad],'seller': [token[1]] ,'mpn': [mpn], 'reason': [infraction['reason']], 'remedy': [infraction['remedy']], 'suggestion': ['Sem sugestão de categoria']})], axis=0)
+                        else:
+                            response_json = response.json()
+                            logger.error(f"Error: {response.status_code} - {response_json} - url: {response.url}")
+                            continue
+                    except Exception as e:
+                        df_error = pd.concat([df_error, pd.DataFrame({'ad_id':[infraction['related_item_id']],'error': [str(e)]})], axis=0)
+                        logger.error(f"Exception occurred: {str(e)}")
+                        continue
+                    
+                    infraction_related_item_id = infraction['related_item_id']
+                    i += 1
+                listagem.append(results)
+            #     async with session.get(f'{DEAFAULT_URL}/moderations/infractions/{seller_id}?related_item_id={token[0]}', ssl=False) as response:
+            #         if 200 == response.status:
+            #             response_json = await response.json()
+            #             if not response_json['infractions']:
+            #                 continue
+            #             for infraction in response_json['infractions']:
+            #                 df_result = pd.concat([df_result, pd.DataFrame({'ad_id':[token[0]],'seller': [token[1]] ,'mpn': [token[2]], 'reason': [infraction['reason']], 'remedy': [infraction['remedy']]})], axis=0)
+            #             listagem.append(response_json['infractions'])
+                        
+            #         else:
+            #             response_json = await response.json()
+            #             logger.error(f"Error: {response.status} - {response_json} - url: {response.url}")
+            df_result.to_csv(f'{token[1]}.csv', index=False)
         except Exception as e:
             logger.error(f"Exception occurred: {str(e)}")
             continue
             
+    df_error.to_csv('error.csv', index=False)
     df_result.to_csv('result.csv', index=False)
     return listagem
     

@@ -29,7 +29,7 @@ for i, token in df.iterrows():
     id = token[0]
     try:
         url = f'https://api.mercadolibre.com/items/{id}?access_token={token[1]}'
-        json = {'status': 'paused', 'available_quantity': 0}
+        json = {'status': 'closed'}
         response = requests.put(url, json=json)
     except:
         print('Erro ao buscar anúncio no ML')
@@ -46,7 +46,7 @@ for i, token in df.iterrows():
         time.sleep(20)
         try:
             url = f'https://api.mercadolibre.com/items/{id}?access_token={token[1]}'
-            json = {'status': 'paused', 'available_quantity': 0}
+            json = {'status': 'closed'}
             response = requests.put(url, json=json)
         except:
             print('Erro ao buscar anúncio no ML')
@@ -61,8 +61,8 @@ for i, token in df.iterrows():
     response = response.json()
     if 'status' in response:
         print('status do anúncio: ', response['status'])
-        if response['status'] == 'paused':
-            print('Anúncio pausado')
+        if response['status'] == 'closed':
+            print('Anúncio fechado')
             print('Quantidade: ', response['available_quantity'])
         data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[id], 'status': [response['status']], 'amount': [response['available_quantity']], 'updated_at': [response['last_updated']]})], axis=0)
     else:

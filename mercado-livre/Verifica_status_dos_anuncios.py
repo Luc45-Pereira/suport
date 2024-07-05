@@ -6,11 +6,12 @@ import json
 def getAdFromML(id, token):
     print('Buscando anúncio no ML')
     try:
-        url = f'https://api.mercadolibre.com/items/{id}?access_token=APP_USR-5417402069385811-082513-1e94ce03f61c8c0140e50dbb34976323-397531057'
+        url = f'https://api.mercadolibre.com/items/{id}'
         response = requests.get(url)
     except:
         print('Erro ao buscar anúncio no ML')
         return False
+    # print(response.json())
     return response.json()
 
 def getIdsFromCSV():
@@ -32,7 +33,7 @@ def create_data_frame_result():
     return data_frame_result
 
 def insert_in_csv_data_frame_result(data_frame_result, id, status, amount = '', updated_at = ''):
-    data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[f'{id},']})], axis=0)
+    data_frame_result = pd.concat([data_frame_result, pd.DataFrame({'id':[f'{id}'], 'status':[f'{status}']})], axis=0)
     return data_frame_result
 
 def main():
@@ -42,6 +43,7 @@ def main():
     adsActive = []
     adsNotActive = []
     adsNotActiveIds = []
+    adInReview = []
     for id in ids:
         response = getAdFromML(id, '')
         if response == False:
@@ -55,6 +57,11 @@ def main():
             if status == 'active':
                 print('Anúncio ativo')
                 # print('Quantidade: ', amount)
+                adsActive.append(id)
+            if status == 'under_review':
+                print('Anúncio em revisão')
+                adInReview.append(id)
+
             data_frame_result = insert_in_csv_data_frame_result(data_frame_result, id, status, amount, updated_at)
         else:
             data_frame_error = insert_in_csv_data_frame_result(data_frame_error, id, response)
@@ -63,6 +70,7 @@ def main():
     data_frame_result.to_csv('result.csv', index=False)
     data_frame_error.to_csv('error.csv', index=False)
     print('Anúncios ativos: ', len(adsActive))
+    print('Anúncios em revisão: ', len(adInReview))
     print('Anúncios não ativos: ', len(adsNotActive))
     print('Anúncios não ativos: ', adsNotActiveIds)
 

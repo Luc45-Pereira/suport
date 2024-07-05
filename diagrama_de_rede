@@ -1,0 +1,18 @@
+digraph "Diagrama de Rede" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="Diagrama de Rede" nodesep=0.60 pad=2.0 rankdir=TB ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	"1fd9a9227224459e88c8399e1905fd23" [label="Load Balancer" height=1.9 image="/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/resources/aws/network/elastic-load-balancing.png" shape=none]
+	subgraph "cluster_Web Services" {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="Web Services" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		a668342098bb442eb71effd5027b7deb [label=Web1 height=1.9 image="/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/resources/aws/compute/ec2.png" shape=none]
+		"52a63006763c4ade8cf7119c8a623c67" [label=Web2 height=1.9 image="/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/resources/aws/compute/ec2.png" shape=none]
+	}
+	"4a2c706cfd6f4148ad311f0d3f0a961d" [label=Database height=1.9 image="/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/resources/aws/database/rds.png" shape=none]
+	d8921a760a684343b36cef4780c307d4 [label=Storage height=1.9 image="/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	"1fd9a9227224459e88c8399e1905fd23" -> a668342098bb442eb71effd5027b7deb [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"1fd9a9227224459e88c8399e1905fd23" -> "52a63006763c4ade8cf7119c8a623c67" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	a668342098bb442eb71effd5027b7deb -> "4a2c706cfd6f4148ad311f0d3f0a961d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"52a63006763c4ade8cf7119c8a623c67" -> "4a2c706cfd6f4148ad311f0d3f0a961d" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"4a2c706cfd6f4148ad311f0d3f0a961d" -> d8921a760a684343b36cef4780c307d4 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}
